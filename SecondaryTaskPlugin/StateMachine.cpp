@@ -14,8 +14,7 @@
 
 class Timer
 {
-    std::thread th;
-    bool running = false;
+    std::atomic<bool> running{false};
 
 public:
     typedef std::chrono::milliseconds Interval;
@@ -26,13 +25,13 @@ public:
     {
         running = true;
 
-        th = std::thread([=]()
-        {
-            while (running == true) {
-                std::this_thread::sleep_for(interval);
-                timeout();
-            }
+        std::thread t([=]() {
+            if(!running.load()) { return; }
+            std::this_thread::sleep_for(std::chrono::milliseconds(interval));
+            if(!running.load()) { return; }
+            timeout();
         });
+        t.detach();
     }
 
     void stop()
@@ -96,8 +95,6 @@ StateMachine& StateMachine::GetInstance() {
 
 StateMachine::StateMachine() {
     std::srand(static_cast<unsigned>(std::time(nullptr))); // Initialize random number generator.
-    _startMeasuringTimestamp = 0;
-    _sentSignalTimestamp = 0;
     _shouldAddMilestone = true; // Start at true to create first milestone
     _initialState = State::WaitForStart;
     _state = State::WaitForStart;
@@ -150,7 +147,7 @@ void StateMachine::processEvent(int eventId) {
             }
         }
     }
-//    assert(validTransitionFound);
+    assert(validTransitionFound);
     if (!validTransitionFound) {
         debugLog("Reached Assert State with event %s", eventToString(eventId).c_str());
     }
@@ -165,9 +162,8 @@ void StateMachine::processTransition(const Transition& transition) {
         case State::Idle: {
             debugLog("Reached Idle State");
             if (transition.validState == State::WaitForStart) {
-                _startMeasuringTimestamp = std::time(nullptr);
+                _startMeasuringTimestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
             }
-            _sentSignalTimestamp = 0;
             int randsecs = std::rand()%(k_maxSignalSeconds-k_minSignalSeconds + 1) + k_minSignalSeconds;
             s_signalTimeElapsedTimer.start(std::chrono::milliseconds(randsecs * 1000), []{
                     StateMachine::GetInstance().processEvent(Event::SignalTimeElapsed);
@@ -178,7 +174,7 @@ void StateMachine::processTransition(const Transition& transition) {
             debugLog("Reached SendSignal State");
             s_signalTimeElapsedTimer.stop();
             (*_signalSendingCallback)();
-            _sentSignalTimestamp = std::time(nullptr);
+            _sentSignalTimestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
             processEvent(Event::SignalSent);
             break;
         }
@@ -192,9 +188,9 @@ void StateMachine::processTransition(const Transition& transition) {
         case State::ProcessResponse: {
             debugLog("Reached Process Response State");
             s_responseTimeoutTimer.stop();
-            time_t now = std::time(nullptr);
-            long msSinceStart = now - _startMeasuringTimestamp;
-            long msReactionTime = now - _sentSignalTimestamp;
+            long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+            long msSinceStart = now - _startMeasuringTimestamp.count();
+            long msReactionTime = now - _sentSignalTimestamp.count();
             if (_shouldAddMilestone) {
                 debugLog("MileStone Added");
                 _shouldAddMilestone = false;
@@ -212,7 +208,6 @@ void StateMachine::processTransition(const Transition& transition) {
 
 // StopMeasure
 void StateMachine::resetState() {
-    _startMeasuringTimestamp = 0;
     s_signalTimeElapsedTimer.stop();
     s_responseTimeoutTimer.stop();
     debugLog("RESET: %s -> %s", stateToString(_state).c_str(), stateToString(_initialState).c_str());

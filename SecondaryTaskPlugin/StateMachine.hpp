@@ -80,8 +80,8 @@ private:
     void (*_signalSendingCallback)();
     void (*_debugLogCallback)(const char *);
     
-    std::time_t _startMeasuringTimestamp;
-    std::time_t _sentSignalTimestamp;
+    std::chrono::milliseconds _startMeasuringTimestamp;
+    std::chrono::milliseconds _sentSignalTimestamp;
     std::vector<std::map<long,long>> _reactionTimes;
 };
 
