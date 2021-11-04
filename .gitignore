@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+#Xcode
+build
+DerivedData
+SecondaryTaskPlugin.xcodeproj/project.xcworkspace/xcuserdata
+SecondaryTaskPlugin.xcodeproj/xcuserdata
+SecondaryTaskPlugin.xccheckout
