@@ -40,8 +40,8 @@ public:
     }
 };
 
-static const unsigned k_maxSignalSeconds = 14;
-static const unsigned k_minSignalSeconds = 9;
+static const unsigned k_maxSignalSeconds = 25;
+static const unsigned k_minSignalSeconds = 7;
 static const unsigned k_responseTimeoutSeconds = 5;
 
 static Timer s_signalTimeElapsedTimer;
@@ -191,6 +191,10 @@ void StateMachine::processTransition(const Transition& transition) {
             long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
             long msSinceStart = now - _startMeasuringTimestamp.count();
             long msReactionTime = now - _sentSignalTimestamp.count();
+            if (msReactionTime < 100) { // if reaction time is lower then the limit of human reaction time then we record it the same as having missed the stimulus
+                msReactionTime = k_responseTimeoutSeconds * 1000;
+            }
+            (*_signalStopCallback)();
             if (_shouldAddMilestone) {
                 debugLog("MileStone Added");
                 _shouldAddMilestone = false;
@@ -221,6 +225,10 @@ void StateMachine::addMilestone() {
 
 void StateMachine::setSignalSendingCallback(void (*callback)()) {
     _signalSendingCallback = callback;
+}
+
+void StateMachine::setSignalStopCallback(void (*callback)()) {
+    _signalStopCallback = callback;
 }
 
 void StateMachine::setDebugLogCallback(void (*callback)(const char *)) {

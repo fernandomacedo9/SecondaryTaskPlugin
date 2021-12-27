@@ -10,7 +10,7 @@
 
 extern "C"
 {
-    void initializeSecondaryTaskWithStimulusHandler(void (*handler)(), void (*debugLogHandler)(const char *));
+    void initializeSecondaryTaskWithStimulusHandler(void (*signalHandler)(), void (*signalStopHandler)(), void (*debugLogHandler)(const char *));
     void startMeasurement();
     void respondToStimulus();
     void stopMeasurement();

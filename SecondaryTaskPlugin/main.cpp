@@ -12,9 +12,10 @@
 extern "C"
 {
 
-void initializeSecondaryTaskWithStimulusHandler(void (*handler)(), void (*debugLogHandler)(const char *)) {
+void initializeSecondaryTaskWithStimulusHandler(void (*signalHandler)(), void (*signalStopHandler)(), void (*debugLogHandler)(const char *)) {
     StateMachine::GetInstance().setDebugLogCallback(debugLogHandler);
-    StateMachine::GetInstance().setSignalSendingCallback(handler);
+    StateMachine::GetInstance().setSignalSendingCallback(signalHandler);
+    StateMachine::GetInstance().setSignalStopCallback(signalStopHandler);
 }
 
 void startMeasurement() {

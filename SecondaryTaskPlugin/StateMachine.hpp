@@ -60,6 +60,7 @@ public:
     void addMilestone();
     
     void setSignalSendingCallback(void (*callback)());
+    void setSignalStopCallback(void (*callback)());
     void setDebugLogCallback(void (*callback)(const char *));
     
 protected:
@@ -78,6 +79,7 @@ private:
     int _state;
     bool _shouldAddMilestone;
     void (*_signalSendingCallback)();
+    void (*_signalStopCallback)();
     void (*_debugLogCallback)(const char *);
     
     std::chrono::milliseconds _startMeasuringTimestamp;
