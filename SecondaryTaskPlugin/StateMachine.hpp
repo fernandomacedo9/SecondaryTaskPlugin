@@ -63,6 +63,8 @@ public:
     void setSignalStopCallback(void (*callback)());
     void setDebugLogCallback(void (*callback)(const char *));
     
+    std::vector<std::map<long,long>> getReactionTimes() {return _reactionTimes;};
+    
 protected:
     StateMachine();
     ~StateMachine(){}

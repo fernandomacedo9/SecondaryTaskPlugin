@@ -15,6 +15,8 @@ extern "C"
     void respondToStimulus();
     void stopMeasurement();
     void addMilestone();
+
+    char* exportData();
 }
 
 #endif /* main_hpp */

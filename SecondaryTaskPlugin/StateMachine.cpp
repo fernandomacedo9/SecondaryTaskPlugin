@@ -198,7 +198,8 @@ void StateMachine::processTransition(const Transition& transition) {
             if (_shouldAddMilestone) {
                 debugLog("MileStone Added");
                 _shouldAddMilestone = false;
-                std::map<long,long> m{{msSinceStart, msReactionTime}};
+                std::map<long,long> m;
+                m[msSinceStart] = msReactionTime;
                 _reactionTimes.emplace_back(m);
             } else {
                 _reactionTimes.back().emplace(msSinceStart, msReactionTime);
@@ -216,6 +217,8 @@ void StateMachine::resetState() {
     s_responseTimeoutTimer.stop();
     debugLog("RESET: %s -> %s", stateToString(_state).c_str(), stateToString(_initialState).c_str());
     _state = _initialState;
+    _shouldAddMilestone = true; // Start at true to create first milestone
+    _reactionTimes.clear();
 }
 
 // MileStone Reached
