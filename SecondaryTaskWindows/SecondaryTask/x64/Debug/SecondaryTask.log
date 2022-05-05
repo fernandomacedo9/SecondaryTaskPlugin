@@ -1,0 +1,19 @@
+﻿  StateMachine.cpp
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(55,9): warning C4068: unknown pragma 'mark'
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(93,9): warning C4068: unknown pragma 'mark'
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(195,22): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(196,31): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(197,33): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+  SecondaryTask.vcxproj -> C:\Users\Fernando\source\repos\SecondaryTask\x64\Debug\SecondaryTask.dll

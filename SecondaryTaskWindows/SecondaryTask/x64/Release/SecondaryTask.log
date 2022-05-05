@@ -1,0 +1,25 @@
+﻿  pch.cpp
+  dllmain.cpp
+  StateMachine.cpp
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(55,9): warning C4068: unknown pragma 'mark'
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(93,9): warning C4068: unknown pragma 'mark'
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(195,22): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(196,31): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Fernando\source\repos\SecondaryTask\SecondaryTask\StateMachine.cpp(197,33): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 562 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  SecondaryTask.vcxproj -> C:\Users\Fernando\source\repos\SecondaryTask\x64\Release\SecondaryTask.dll
