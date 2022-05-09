@@ -1,38 +1,27 @@
 //
 //  main.cpp
-//  SecondaryTaskPlugin
+//  sty
 //
-//  Created by Fernando Macedo on 18/10/2021.
+//  Created by Fernando Macedo on 04/11/2021.
 //
 
-#include "main.hpp"
+#include <iostream>
+#include <chrono>
+#include <thread>
 
 #include "StateMachine.hpp"
 
-extern "C"
-{
-
-void initializeSecondaryTaskWithStimulusHandler(void (*signalHandler)(), void (*signalStopHandler)(), void (*debugLogHandler)(const char *)) {
-    StateMachine::GetInstance().setDebugLogCallback(debugLogHandler);
-    StateMachine::GetInstance().setSignalSendingCallback(signalHandler);
-    StateMachine::GetInstance().setSignalStopCallback(signalStopHandler);
+void logFunc(const char* text) {
+    printf(text);
+    printf("\n");
 }
 
-void startMeasurement() {
-    StateMachine::GetInstance().resetState();
-    StateMachine::GetInstance().processEvent(Event::StartMeasure);
+void handlerFunc() {
+    printf("Signal Received\n");
 }
 
-void respondToStimulus() {
-    StateMachine::GetInstance().processEvent(Event::ResponseReceived);
-}
-
-void stopMeasurement() {
-    StateMachine::GetInstance().resetState();
-}
-
-void addMilestone() {
-    StateMachine::GetInstance().addMilestone();
+void stopHandlerFunc() {
+    printf("Signal Stop\n");
 }
 
 char* exportData() {
@@ -63,4 +52,14 @@ char* exportData() {
     return cString;
 }
 
+int main(int argc, const char * argv[]) {
+    StateMachine::GetInstance().setDebugLogCallback(logFunc);
+    StateMachine::GetInstance().setSignalSendingCallback(handlerFunc);
+    StateMachine::GetInstance().setSignalStopCallback(stopHandlerFunc);
+    StateMachine::GetInstance().resetState();
+    StateMachine::GetInstance().processEvent(Event::StartMeasure);
+    std::this_thread::sleep_for(std::chrono::seconds(30));
+    auto data = exportData();
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+    return 0;
 }

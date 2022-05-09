@@ -7,9 +7,12 @@
 
 #include "StateMachine.hpp"
 
-#include <chrono>
+#include <assert.h>
 #include <cmath>
+#include <functional>
+#include <stdarg.h>
 #include <stdlib.h>
+#include <string>
 #include <thread>
 
 class Timer
@@ -147,7 +150,7 @@ void StateMachine::processEvent(int eventId) {
             }
         }
     }
-    assert(validTransitionFound);
+   // assert(validTransitionFound);
     if (!validTransitionFound) {
         debugLog("Reached Assert State with event %s", eventToString(eventId).c_str());
     }
@@ -255,7 +258,11 @@ void StateMachine::debugLog(const char* str, ...) {
         }
         
         char* buffer = (char*)malloc((size_t)bufferSize + 1); // + 1 for string delimiter
+#ifndef MAC_BUILD
+        auto writtenBytes = vsprintf_s(buffer, (size_t)bufferSize + 1, str, argsCopy);
+#else
         auto writtenBytes = vsprintf(buffer, str, argsCopy);
+#endif
         
         if (writtenBytes != bufferSize) {
             free(buffer);

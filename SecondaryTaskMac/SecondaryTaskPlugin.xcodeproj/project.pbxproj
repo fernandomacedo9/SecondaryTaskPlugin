@@ -7,35 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B766C9BE271E28FE00126725 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B766C9BC271E28FE00126725 /* main.cpp */; };
-		B766C9FD2720B10B00126725 /* StateMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B766C9FB2720B10B00126725 /* StateMachine.cpp */; };
+		B7275FAE277BBD970089DA4B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7275FAA277BBD400089DA4B /* OpenGL.framework */; };
+		B7275FC9277BC00D0089DA4B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7275FAA277BBD400089DA4B /* OpenGL.framework */; };
+		B79263182829C3920075CB8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B79263172829C3920075CB8F /* main.cpp */; };
+		B792631D2829C3A50075CB8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B79263192829C3A50075CB8F /* main.cpp */; };
+		B792631E2829C3A50075CB8F /* StateMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B792631A2829C3A50075CB8F /* StateMachine.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B72545402734948000EF1503 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		B72545422734948000EF1503 /* sty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sty; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7275FAA277BBD400089DA4B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		B7275FAC277BBD900089DA4B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		B766C9B2271E28D300126725 /* SecondaryTaskPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecondaryTaskPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B766C9B5271E28D300126725 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B766C9BC271E28FE00126725 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		B766C9BD271E28FE00126725 /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
-		B766C9FB2720B10B00126725 /* StateMachine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateMachine.cpp; sourceTree = "<group>"; };
-		B766C9FC2720B10B00126725 /* StateMachine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateMachine.hpp; sourceTree = "<group>"; };
+		B79263172829C3920075CB8F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B79263192829C3A50075CB8F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/main.cpp; sourceTree = "<group>"; };
+		B792631A2829C3A50075CB8F /* StateMachine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StateMachine.cpp; path = ../../src/StateMachine.cpp; sourceTree = "<group>"; };
+		B792631B2829C3A50075CB8F /* main.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = main.hpp; path = ../../src/main.hpp; sourceTree = "<group>"; };
+		B792631C2829C3A50075CB8F /* StateMachine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StateMachine.hpp; path = ../../src/StateMachine.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B725453F2734948000EF1503 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7275FAE277BBD970089DA4B /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B766C9AF271E28D300126725 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7275FC9277BC00D0089DA4B /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B7275FA9277BBD400089DA4B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B7275FAC277BBD900089DA4B /* CoreFoundation.framework */,
+				B7275FAA277BBD400089DA4B /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B766C9A9271E28D300126725 = {
 			isa = PBXGroup;
 			children = (
+				B79263162829C3920075CB8F /* sty */,
 				B766C9B4271E28D300126725 /* SecondaryTaskPlugin */,
 				B766C9B3271E28D300126725 /* Products */,
+				B7275FA9277BBD400089DA4B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -43,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				B766C9B2271E28D300126725 /* SecondaryTaskPlugin.bundle */,
+				B72545422734948000EF1503 /* sty */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -51,17 +91,43 @@
 			isa = PBXGroup;
 			children = (
 				B766C9B5271E28D300126725 /* Info.plist */,
-				B766C9BC271E28FE00126725 /* main.cpp */,
-				B766C9BD271E28FE00126725 /* main.hpp */,
-				B766C9FB2720B10B00126725 /* StateMachine.cpp */,
-				B766C9FC2720B10B00126725 /* StateMachine.hpp */,
+				B79263192829C3A50075CB8F /* main.cpp */,
+				B792631B2829C3A50075CB8F /* main.hpp */,
+				B792631A2829C3A50075CB8F /* StateMachine.cpp */,
+				B792631C2829C3A50075CB8F /* StateMachine.hpp */,
 			);
 			path = SecondaryTaskPlugin;
+			sourceTree = "<group>";
+		};
+		B79263162829C3920075CB8F /* sty */ = {
+			isa = PBXGroup;
+			children = (
+				B79263172829C3920075CB8F /* main.cpp */,
+			);
+			name = sty;
+			path = ../sty;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B72545412734948000EF1503 /* sty */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B72545482734948000EF1503 /* Build configuration list for PBXNativeTarget "sty" */;
+			buildPhases = (
+				B725453E2734948000EF1503 /* Sources */,
+				B725453F2734948000EF1503 /* Frameworks */,
+				B72545402734948000EF1503 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sty;
+			productName = sty;
+			productReference = B72545422734948000EF1503 /* sty */;
+			productType = "com.apple.product-type.tool";
+		};
 		B766C9B1271E28D300126725 /* SecondaryTaskPlugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B766C9B8271E28D300126725 /* Build configuration list for PBXNativeTarget "SecondaryTaskPlugin" */;
@@ -87,6 +153,9 @@
 			attributes = {
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					B72545412734948000EF1503 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					B766C9B1271E28D300126725 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -106,6 +175,7 @@
 			projectRoot = "";
 			targets = (
 				B766C9B1271E28D300126725 /* SecondaryTaskPlugin */,
+				B72545412734948000EF1503 /* sty */,
 			);
 		};
 /* End PBXProject section */
@@ -121,18 +191,48 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B725453E2734948000EF1503 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B79263182829C3920075CB8F /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B766C9AE271E28D300126725 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B766C9BE271E28FE00126725 /* main.cpp in Sources */,
-				B766C9FD2720B10B00126725 /* StateMachine.cpp in Sources */,
+				B792631D2829C3A50075CB8F /* main.cpp in Sources */,
+				B792631E2829C3A50075CB8F /* StateMachine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		B72545462734948000EF1503 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7SJJAUTP37;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B72545472734948000EF1503 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7SJJAUTP37;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		B766C9B6271E28D300126725 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -177,6 +277,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"MAC_BUILD=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -231,6 +332,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "MAC_BUILD=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -279,6 +381,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B72545482734948000EF1503 /* Build configuration list for PBXNativeTarget "sty" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B72545462734948000EF1503 /* Debug */,
+				B72545472734948000EF1503 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B766C9AD271E28D300126725 /* Build configuration list for PBXProject "SecondaryTaskPlugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

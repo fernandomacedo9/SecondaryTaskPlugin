@@ -9,19 +9,5 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
-#include "StateMachine.hpp"
-
-#include <string>
-
-extern "C"
-{
-    __declspec(dllexport) void initializeSecondaryTaskWithStimulusHandler(void (*signalHandler)(), void (*signalStopHandler)(), void (*debugLogHandler)(const char*));
-    __declspec(dllexport) void startMeasurement();
-    __declspec(dllexport) void respondToStimulus();
-    __declspec(dllexport) void stopMeasurement();
-    __declspec(dllexport) void addMilestone();
-
-    __declspec(dllexport) char* exportData();
-}
 
 #endif //PCH_H
