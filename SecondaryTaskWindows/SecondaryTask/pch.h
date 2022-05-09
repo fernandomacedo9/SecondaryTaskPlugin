@@ -15,13 +15,13 @@
 
 extern "C"
 {
-    void initializeSecondaryTaskWithStimulusHandler(void (*signalHandler)(), void (*signalStopHandler)(), void (*debugLogHandler)(const char*));
-    void startMeasurement();
-    void respondToStimulus();
-    void stopMeasurement();
-    void addMilestone();
+    __declspec(dllexport) void initializeSecondaryTaskWithStimulusHandler(void (*signalHandler)(), void (*signalStopHandler)(), void (*debugLogHandler)(const char*));
+    __declspec(dllexport) void startMeasurement();
+    __declspec(dllexport) void respondToStimulus();
+    __declspec(dllexport) void stopMeasurement();
+    __declspec(dllexport) void addMilestone();
 
-    char* exportData();
+    __declspec(dllexport) char* exportData();
 }
 
 #endif //PCH_H

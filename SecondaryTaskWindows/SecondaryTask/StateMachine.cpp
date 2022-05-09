@@ -151,7 +151,7 @@ void StateMachine::processEvent(int eventId) {
             }
         }
     }
-    assert(validTransitionFound);
+   // assert(validTransitionFound);
     if (!validTransitionFound) {
         debugLog("Reached Assert State with event %s", eventToString(eventId).c_str());
     }
@@ -259,7 +259,7 @@ void StateMachine::debugLog(const char* str, ...) {
         }
         
         char* buffer = (char*)malloc((size_t)bufferSize + 1); // + 1 for string delimiter
-        auto writtenBytes = vsprintf_s(buffer, sizeof buffer, str, argsCopy);
+        auto writtenBytes = vsprintf_s(buffer, (size_t)bufferSize + 1, str, argsCopy);
         
         if (writtenBytes != bufferSize) {
             free(buffer);

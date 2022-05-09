@@ -20,30 +20,30 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 extern "C"
 {
 
-    void initializeSecondaryTaskWithStimulusHandler(void (*signalHandler)(), void (*signalStopHandler)(), void (*debugLogHandler)(const char*)) {
+    __declspec(dllexport) void initializeSecondaryTaskWithStimulusHandler(void (*signalHandler)(), void (*signalStopHandler)(), void (*debugLogHandler)(const char*)) {
         StateMachine::GetInstance().setDebugLogCallback(debugLogHandler);
         StateMachine::GetInstance().setSignalSendingCallback(signalHandler);
         StateMachine::GetInstance().setSignalStopCallback(signalStopHandler);
     }
 
-    void startMeasurement() {
+    __declspec(dllexport) void startMeasurement() {
         StateMachine::GetInstance().resetState();
         StateMachine::GetInstance().processEvent(Event::StartMeasure);
     }
 
-    void respondToStimulus() {
+    __declspec(dllexport) void respondToStimulus() {
         StateMachine::GetInstance().processEvent(Event::ResponseReceived);
     }
 
-    void stopMeasurement() {
+    __declspec(dllexport) void stopMeasurement() {
         StateMachine::GetInstance().resetState();
     }
 
-    void addMilestone() {
+    __declspec(dllexport) void addMilestone() {
         StateMachine::GetInstance().addMilestone();
     }
 
-    char* exportData() {
+    __declspec(dllexport) char* exportData() {
         std::vector<std::map<long, long>> reactionTimes = StateMachine::GetInstance().getReactionTimes();
         std::string result = "[";
 
