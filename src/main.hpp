@@ -30,10 +30,19 @@ extern "C"
     __declspec(dllexport)
 #endif
     void addMilestone();
+#ifndef MAC_BUILD
+    __declspec(dllexport)
+#endif
+    void addEventLog(const char* eventName);
 
 #ifndef MAC_BUILD
     __declspec(dllexport)
 #endif
-    char* exportData();
+    char* exportReactionData();
+
+#ifndef MAC_BUILD
+    __declspec(dllexport)
+#endif
+    char* exportEventsData();
 }
 #endif /* main_hpp */

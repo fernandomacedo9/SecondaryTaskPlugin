@@ -64,7 +64,9 @@ public:
     void setSignalStopCallback(void (*callback)());
     void setDebugLogCallback(void (*callback)(const char *));
     
-    std::vector<std::map<long,long>> getReactionTimes() {return _reactionTimes;};
+    void addLogEvent(std::string eventName);
+    
+    std::pair<std::vector<std::map<long,long>>, std::vector<std::map<long,std::string>>> getCollectedData() {return _collectedData;};
     
 protected:
     StateMachine();
@@ -81,13 +83,14 @@ private:
     int _initialState;
     int _state;
     bool _shouldAddMilestone;
+    bool _shouldAddLogMilestone;
     void (*_signalSendingCallback)();
     void (*_signalStopCallback)();
     void (*_debugLogCallback)(const char *);
     
     std::chrono::milliseconds _startMeasuringTimestamp;
     std::chrono::milliseconds _sentSignalTimestamp;
-    std::vector<std::map<long,long>> _reactionTimes;
+    std::pair<std::vector<std::map<long,long>>, std::vector<std::map<long,std::string>>> _collectedData;
 };
 
 #endif /* StateMachine_hpp */

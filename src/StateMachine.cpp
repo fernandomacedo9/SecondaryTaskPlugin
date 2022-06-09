@@ -99,6 +99,7 @@ StateMachine& StateMachine::GetInstance() {
 StateMachine::StateMachine() {
     std::srand(static_cast<unsigned>(std::time(nullptr))); // Initialize random number generator.
     _shouldAddMilestone = true; // Start at true to create first milestone
+    _shouldAddLogMilestone = true;
     _initialState = State::WaitForStart;
     _state = State::WaitForStart;
     setValidTransitions({
@@ -203,9 +204,9 @@ void StateMachine::processTransition(const Transition& transition) {
                 _shouldAddMilestone = false;
                 std::map<long,long> m;
                 m[msSinceStart] = msReactionTime;
-                _reactionTimes.emplace_back(m);
+                _collectedData.first.emplace_back(m);
             } else {
-                _reactionTimes.back().emplace(msSinceStart, msReactionTime);
+                _collectedData.first.back().emplace(msSinceStart, msReactionTime);
             }
             debugLog("ms from start: %d, ms reaction:%d", msSinceStart, msReactionTime);
             processEvent(Event::ResponseProcessed);
@@ -221,12 +222,15 @@ void StateMachine::resetState() {
     debugLog("RESET: %s -> %s", stateToString(_state).c_str(), stateToString(_initialState).c_str());
     _state = _initialState;
     _shouldAddMilestone = true; // Start at true to create first milestone
-    _reactionTimes.clear();
+    _shouldAddLogMilestone = true;
+    _collectedData.first.clear();
+    _collectedData.second.clear();
 }
 
 // MileStone Reached
 void StateMachine::addMilestone() {
     _shouldAddMilestone = true;
+    _shouldAddLogMilestone = true;
 }
 
 void StateMachine::setSignalSendingCallback(void (*callback)()) {
@@ -235,6 +239,24 @@ void StateMachine::setSignalSendingCallback(void (*callback)()) {
 
 void StateMachine::setSignalStopCallback(void (*callback)()) {
     _signalStopCallback = callback;
+}
+
+void StateMachine::addLogEvent(std::string eventName) {
+    if (_state == State::WaitForStart) {
+        return;
+    }
+    
+    long now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    long msSinceStart = now - _startMeasuringTimestamp.count();
+    if (_shouldAddLogMilestone) {
+        debugLog("MileStone Added");
+        _shouldAddLogMilestone = false;
+        std::map<long,std::string> m;
+        m[msSinceStart] = eventName;
+        _collectedData.second.emplace_back(m);
+    } else {
+        _collectedData.second.back().emplace(msSinceStart, eventName);
+    }
 }
 
 void StateMachine::setDebugLogCallback(void (*callback)(const char *)) {

@@ -55,8 +55,15 @@ extern "C"
 #ifndef MAC_BUILD
     __declspec(dllexport)
 #endif
-    char* exportData() {
-        std::vector<std::map<long, long>> reactionTimes = StateMachine::GetInstance().getReactionTimes();
+    void addEventLog(const char* eventName) {
+        StateMachine::GetInstance().addLogEvent(eventName);
+    }
+
+#ifndef MAC_BUILD
+    __declspec(dllexport)
+#endif
+    char* exportReactionData() {
+        std::vector<std::map<long, long>> reactionTimes = StateMachine::GetInstance().getCollectedData().first;
         std::string result = "[";
 
         for (int i = 0; i < reactionTimes.size(); i++) {
@@ -87,5 +94,42 @@ extern "C"
 
         return cString;
     }
+
+
+#ifndef MAC_BUILD
+__declspec(dllexport)
+#endif
+char* exportEventsData() {
+    std::vector<std::map<long, std::string>> eventsLog = StateMachine::GetInstance().getCollectedData().second;
+    std::string result = "[";
+
+    for (int i = 0; i < eventsLog.size(); i++) {
+        result += "[" + std::to_string(i) + ",";
+        for (auto iter = eventsLog[i].begin(); iter != eventsLog[i].end(); ) {
+            result += "[" + std::to_string(iter->first) + "," + iter->second + "]";
+            if (++iter != eventsLog[i].end()) {
+                result += ",";
+            }
+        }
+        if (i == eventsLog.size() - 1) {
+            result += "]";
+        }
+        else {
+            result += "],";
+        }
+    }
+
+    result += "]";
+
+    //create a null terminated C string on the heap so that our string's memory isn't wiped out right after method's return
+    char* cString = (char*)malloc(strlen(result.c_str()) + 1);
+#ifndef MAC_BUILD
+    strcpy_s(cString, sizeof cString, result.c_str());
+#else
+    strcpy(cString, result.c_str());
+#endif
+
+    return cString;
+}
 
 }
