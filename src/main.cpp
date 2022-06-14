@@ -86,11 +86,7 @@ extern "C"
 
         //create a null terminated C string on the heap so that our string's memory isn't wiped out right after method's return
         char* cString = (char*)malloc(strlen(result.c_str()) + 1);
-#ifndef MAC_BUILD
-        strcpy_s(cString, sizeof cString, result.c_str());
-#else
         strcpy(cString, result.c_str());
-#endif
 
         return cString;
     }
@@ -123,11 +119,7 @@ char* exportEventsData() {
 
     //create a null terminated C string on the heap so that our string's memory isn't wiped out right after method's return
     char* cString = (char*)malloc(strlen(result.c_str()) + 1);
-#ifndef MAC_BUILD
-    strcpy_s(cString, sizeof cString, result.c_str());
-#else
     strcpy(cString, result.c_str());
-#endif
 
     return cString;
 }
