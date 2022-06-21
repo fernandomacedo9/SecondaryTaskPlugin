@@ -27,7 +27,6 @@ extern "C"
     __declspec(dllexport)
 #endif
     void startMeasurement() {
-        StateMachine::GetInstance().resetState();
         StateMachine::GetInstance().processEvent(Event::StartMeasure);
     }
 

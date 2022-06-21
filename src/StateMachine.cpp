@@ -177,7 +177,9 @@ void StateMachine::processTransition(const Transition& transition) {
         case State::SendSignal: {
             debugLog("Reached SendSignal State");
             s_signalTimeElapsedTimer.stop();
-            (*_signalSendingCallback)();
+            if (_signalSendingCallback) {
+                (*_signalSendingCallback)();
+            }
             _sentSignalTimestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
             processEvent(Event::SignalSent);
             break;
@@ -198,7 +200,9 @@ void StateMachine::processTransition(const Transition& transition) {
             if (msReactionTime < 100) { // if reaction time is lower then the limit of human reaction time then we record it the same as having missed the stimulus
                 msReactionTime = k_responseTimeoutSeconds * 1000;
             }
-            (*_signalStopCallback)();
+            if (_signalStopCallback) {
+                (*_signalStopCallback)();
+            }
             if (_shouldAddMilestone) {
                 debugLog("MileStone Added");
                 _shouldAddMilestone = false;
@@ -225,6 +229,8 @@ void StateMachine::resetState() {
     _shouldAddLogMilestone = true;
     _collectedData.first.clear();
     _collectedData.second.clear();
+    _signalStopCallback = nullptr;
+    _signalSendingCallback = nullptr;
 }
 
 // MileStone Reached
