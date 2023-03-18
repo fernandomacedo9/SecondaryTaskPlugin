@@ -43,8 +43,8 @@ public:
     }
 };
 
-static const unsigned k_maxSignalSeconds = 25;
-static const unsigned k_minSignalSeconds = 7;
+static const unsigned k_maxSignalSeconds = 30;
+static const unsigned k_minSignalSeconds = 15;
 static const unsigned k_responseTimeoutSeconds = 5;
 
 static Timer s_signalTimeElapsedTimer;
