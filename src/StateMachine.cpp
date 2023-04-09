@@ -43,7 +43,7 @@ public:
     }
 };
 
-static const unsigned k_maxSignalSeconds = 30;
+static const unsigned k_maxSignalSeconds = 25;
 static const unsigned k_minSignalSeconds = 15;
 static const unsigned k_responseTimeoutSeconds = 5;
 
@@ -54,7 +54,7 @@ static Timer s_responseTimeoutTimer;
 #pragma mark - Auxiliary Functions
 
 std::string stateToString(int state) {
-    switch (state) {
+    switch (state) { 
         case State::WaitForStart:
             return "WaitForStart";
         case State::Idle:
@@ -206,13 +206,16 @@ void StateMachine::processTransition(const Transition& transition) {
             if (_shouldAddMilestone) {
                 debugLog("MileStone Added");
                 _shouldAddMilestone = false;
-                std::map<long,long> m;
-                m[msSinceStart] = msReactionTime;
+                std::map<long,std::pair<long, std::string>> m;
+                std::pair<long, std::string> p{ msReactionTime, _previousPosition };
+                m[msSinceStart] = p;
                 _collectedData.first.emplace_back(m);
             } else {
-                _collectedData.first.back().emplace(msSinceStart, msReactionTime);
+                std::pair<long, std::string> p{ msReactionTime, _previousPosition };
+                _collectedData.first.back().emplace(msSinceStart, p);
             }
             debugLog("ms from start: %d, ms reaction:%d", msSinceStart, msReactionTime);
+            _previousPosition = "";
             processEvent(Event::ResponseProcessed);
             break;
         }

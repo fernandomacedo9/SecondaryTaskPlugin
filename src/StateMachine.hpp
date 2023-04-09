@@ -65,8 +65,10 @@ public:
     void setDebugLogCallback(void (*callback)(const char *));
     
     void addLogEvent(std::string eventName);
+
+    void addPreviousPosition(std::string prevPos) { _previousPosition = prevPos; };
     
-    std::pair<std::vector<std::map<long,long>>, std::vector<std::map<long,std::string>>> getCollectedData() {return _collectedData;};
+    std::pair<std::vector<std::map<long, std::pair<long, std::string>>>, std::vector<std::map<long,std::string>>> getCollectedData() {return _collectedData;};
     
 protected:
     StateMachine();
@@ -90,7 +92,8 @@ private:
     
     std::chrono::milliseconds _startMeasuringTimestamp;
     std::chrono::milliseconds _sentSignalTimestamp;
-    std::pair<std::vector<std::map<long,long>>, std::vector<std::map<long,std::string>>> _collectedData;
+    std::string _previousPosition;
+    std::pair<std::vector<std::map<long, std::pair<long, std::string>>>, std::vector<std::map<long,std::string>>> _collectedData;
 };
 
 #endif /* StateMachine_hpp */

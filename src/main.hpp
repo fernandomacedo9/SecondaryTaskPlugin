@@ -21,7 +21,7 @@ extern "C"
 #ifndef MAC_BUILD
     __declspec(dllexport)
 #endif
-    void respondToStimulus();
+    void respondToStimulus(const char* pos);
 #ifndef MAC_BUILD
     __declspec(dllexport)
 #endif

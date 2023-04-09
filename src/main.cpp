@@ -33,7 +33,8 @@ extern "C"
 #ifndef MAC_BUILD
     __declspec(dllexport)
 #endif
-    void respondToStimulus() {
+    void respondToStimulus(const char* pos) {
+        StateMachine::GetInstance().addPreviousPosition(pos);
         StateMachine::GetInstance().processEvent(Event::ResponseReceived);
     }
 
@@ -62,13 +63,13 @@ extern "C"
     __declspec(dllexport)
 #endif
     char* exportReactionData() {
-        std::vector<std::map<long, long>> reactionTimes = StateMachine::GetInstance().getCollectedData().first;
+        std::vector<std::map<long, std::pair<long, std::string>>> reactionTimes = StateMachine::GetInstance().getCollectedData().first;
         std::string result = "[";
 
         for (int i = 0; i < reactionTimes.size(); i++) {
             result += "[" + std::to_string(i) + ",";
             for (auto iter = reactionTimes[i].begin(); iter != reactionTimes[i].end(); ) {
-                result += "[" + std::to_string(iter->first) + "," + std::to_string(iter->second) + "]";
+                result += "[" + std::to_string(iter->first) + "," + std::to_string(iter->second.first) + iter->second.second + "]";
                 if (++iter != reactionTimes[i].end()) {
                     result += ",";
                 }
